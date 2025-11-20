@@ -8,7 +8,6 @@ This task focuses on converting the **GPIO driver for STM32F401CC** from **C** t
 The main goal is to reorganize the driver into a **C++-friendly structure** using:
 
 * `namespace`
-* `extern "C"` compatibility
 * Better code organization
 * Maintaining full backward compatibility with C-style MCU programming
 
@@ -37,7 +36,7 @@ The task involved editing multiple files:
 
    ```cpp
    #ifdef __cplusplus
-   extern "C" {
+     {
    }
    #endif
    ```
