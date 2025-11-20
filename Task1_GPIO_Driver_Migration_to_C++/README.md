@@ -116,34 +116,17 @@ Everything follows the same hardware logic, just safer for C++ compilation.
 
 ## ⚙️ **How to Compile**
 
-Use **g++**, not gcc:
+Use **g++**:
 
 ```bash
-g++ -c GPIO.cpp -o GPIO.o
+g++ -c GPIO.c -o GPIO.o
 ```
 
-Or with the whole project:
+Or **gcc**:
 
 ```bash
-g++ *.cpp -o firmware.elf
+gcc -c GPIO.c GPIO.o
 ```
-
-gcc ❌ **will not compile** because namespaces are C++-only.
-
----
-
-## 🧪 **Testing**
-
-* Successfully compiled in C++ environment.
-* No register-level modifications.
-* Checked for:
-
-  * Alternate function writing
-  * MODER/PUPDR/OSPEEDR updates
-  * ODR/IDR reading/writing
-  * Atomic set/reset using BSRR
-
-All behavior matches the C version exactly.
 
 ---
 
