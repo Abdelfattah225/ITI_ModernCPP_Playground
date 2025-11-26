@@ -28,7 +28,8 @@ The program is contained within a single `main.cpp` file and can be compiled wit
     ./a.out
     ```
 
-## Expected Output and Analysisabdelfattah@3zzazi:~/Modern_CPP/Tasks/CPP_TASK2$ g++ main.cpp 
+## Expected Output and Analysis
+abdelfattah@3zzazi:~/Modern_CPP/Tasks/CPP_TASK2$ g++ main.cpp 
 abdelfattah@3zzazi:~/Modern_CPP/Tasks/CPP_TASK2$ ./a.out 
 Simulating 'read' for 1024 bytes.
 Simulating 'write' of 512 bytes.
