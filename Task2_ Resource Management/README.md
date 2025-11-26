@@ -29,6 +29,7 @@ The program is contained within a single `main.cpp` file and can be compiled wit
     ```
 
 ## Expected Output and Analysis
+```sh
 abdelfattah@3zzazi:~/Modern_CPP/Tasks/CPP_TASK2$ g++ main.cpp 
 
 abdelfattah@3zzazi:~/Modern_CPP/Tasks/CPP_TASK2$ ./a.out 
@@ -43,7 +44,7 @@ Simulating 'read' for 1024 bytes.
 Simulating 'write' of 512 bytes.
 free(): double free detected in tcache 2
 Aborted (core dumped)
-
+```
 When run, the program will execute successfully up until the point where the objects are destroyed. It will then crash with a "double free" error. This is the **expected and correct outcome** for this exercise.
 
 ```
