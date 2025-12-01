@@ -1,15 +1,9 @@
-Here is a comprehensive `README.md` file documenting your project. It covers the project description, the OOP design principles used in your code, the cross-compilation process, and deployment steps.
 
-You can save this file as **`README.md`** inside your `CPP_TASK3` folder.
-
-***
-
-```markdown
 # C++ OOP GPIO Control for Raspberry Pi 3 (Cross-Compiled)
 
 This project implements a C++ Object-Oriented wrapper for the Linux `sysfs` GPIO interface. It allows for controlling Raspberry Pi 3 GPIO pins using high-level abstractions (classes, vectors, and move semantics).
 
- The project is cross-compiled on a host Linux machine using a custom **Crosstool-NG** toolchain targeting **AArch64** (ARM64).
+The project is cross-compiled on a host Linux machine using a custom **Crosstool-NG** toolchain targeting **AArch64** (ARM64) and transferred to the target hardware via **SCP**.
 
 ## 1. Project Overview
 
@@ -23,95 +17,90 @@ This project implements a C++ Object-Oriented wrapper for the Linux `sysfs` GPIO
 
 ### Hardware Configuration
 *   **Target:** Raspberry Pi 3 (Running 64-bit Linux).
-*   **GPIO Base:** The code is configured with `GPIO_BASE = 512` (Common for Ubuntu Server on RPi). 
-    *   *Note: If using standard Raspberry Pi OS, you may need to change this to `0` or `399` in `gpio.cpp`.*
+*   **GPIO Base:** The code is configured with `GPIO_BASE = 512`. 
+    *   *Note: This offset is specific to the OS version (often Ubuntu Server). Standard Raspberry Pi OS might use offset 0 or 399.*
 
 ## 2. Environment Setup
 
-Before compiling, ensure your custom toolchain is added to your system `PATH`.
+Before compiling, the custom toolchain was added to the system `PATH`.
 
 **Toolchain Path:** `~/x-tools/aarch64-rpi3-linux-gnu/bin`
 
-Run this command in your terminal:
+Command used to export the path:
 ```bash
 export PATH=$PATH:~/x-tools/aarch64-rpi3-linux-gnu/bin
 ```
 
-To verify the compiler is accessible:
-```bash
-aarch64-rpi3-linux-gnu-g++ --version
-```
-
 ## 3. Compilation Steps
 
-### Step 1: Sanity Check (Optional)
-Compile a simple "Hello World" program to ensure the toolchain works.
+### Step 1: Sanity Check (Demo)
+First, a simple `demo.cpp` was compiled to verify the toolchain configuration.
+```bash
+aarch64-rpi3-linux-gnu-g++ -o demo_app demo.cpp
+```
 
-1.  Create `demo.cpp` (if not exists).
-2.  Compile:
-    ```bash
-    aarch64-rpi3-linux-gnu-g++ -o demo_app demo.cpp
-    ```
-
-### Step 2: Compile the GPIO Application
-Compile the main `gpio.cpp` file.
-
+### Step 2: Compile GPIO Application
+The main OOP GPIO implementation was compiled using `g++`.
 ```bash
 aarch64-rpi3-linux-gnu-g++ -o gpio_app gpio.cpp
 ```
 
-*   **-o gpio_app**: The name of the resulting executable.
-*   **gpio.cpp**: Your source code file.
-
-### Step 3: Verify Architecture
-Ensure the binary is built for ARM64 and not the host x86 machine.
-
+### Step 3: Verification
+We verified the binary architecture using the `file` command to ensure it was built for ARM64.
 ```bash
 file gpio_app
 ```
-**Expected Output:** `ELF 64-bit LSB executable, ARM aarch64...`
+**Output:** `ELF 64-bit LSB executable, ARM aarch64...`
 
-## 4. Deployment
+## 4. File Transfer (SCP)
 
-Transfer the compiled executable to your Raspberry Pi using `scp`.
+Since the code was compiled on a host PC (x86), the binary files were transferred to the Raspberry Pi using `scp` (Secure Copy Protocol).
 
+**Syntax:**
+`scp <source_file> <username>@<pi_ip_address>:<destination_path>`
+
+**Command used to transfer the GPIO app:**
 ```bash
-scp gpio_app <username>@<pi_ip_address>:/home/<username>/
+scp ./gpio_app raspberry@raspberrypi.local:/home/raspberry/
 ```
-*   Replace `<username>` with your RPi username (e.g., `pi` or `ubuntu`).
-*   Replace `<pi_ip_address>` with the RPi's IP address (e.g., `192.168.1.15`).
 
 ## 5. Execution on Raspberry Pi
 
-1.  **SSH into the Pi:**
+
+1.  **Navigate to the directory:**
     ```bash
-    ssh <username>@<pi_ip_address>
+    cd /home/raspberry/
     ```
 
-2.  **Navigate to the directory:**
-    ```bash
-    cd /home/<username>/
-    ```
-
-3.  **Run the application:**
-    Since the code accesses hardware `/sys/class/gpio`, you usually need `root` privileges.
-
+2.  **Run the application:**
+    Root privileges (`sudo`) are required to access the `/sys/class/gpio` hardware interface.
     ```bash
     sudo ./gpio_app
     ```
 
-## 6. Code Usage Example
+## 6.Code Usage Example
 
-The `main` function demonstrates initializing a list of custom pins:
+- The application performs two primary demonstrations in the main function:
+ - LED State Control:
+        - Initializes a GPIO pin.
+        - Sets state to High (LED ON) and prints GPIO_18 State: High.
+        - Sets state to Low (LED OFF) and prints GPIO_18 State: Low.
+        - Delays are included to allow for hardware observation.
+   
+  ![ToggleLED.png](ToggleLED.png)
+  
+  ![LEDOFF.jpeg](LEDOFF.jpeg)
+  
+  ![LEDON.jpeg](LEDON.jpeg)
 
-```cpp
-// Initialize Pin 17 (IN), Pin 18 (OUT/HIGH), Pin 19 (OUT/LOW)
-auto customPins = MCAL::GPIO::GPIO_InitPins({
-    {17, MCAL::GPIO::PinIN,  MCAL::GPIO::PinLow},   
-    {18, MCAL::GPIO::PinOUT, MCAL::GPIO::PinHigh},  
-    {19, MCAL::GPIO::PinOUT, MCAL::GPIO::PinLow}    
-});
-```
 
-When `customPins` goes out of scope (end of program), the destructors will automatically unexport these pins from the system.
-```
+- Configuration Logic Verification:
+      - Compares different PinConfig structures.
+      - Detects if a new configuration matches the existing one.
+      - Outputs Config Check: SAME CFG or Config Check: DIFF CFG to the terminal based on the parameters.
+
+  ![InitDiffCFG.png](InitDiffCFG.png)
+  
+  ![InitSameCFG.png](InitSameCFG.png)
+
+   
