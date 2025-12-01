@@ -82,10 +82,10 @@ scp ./gpio_app raspberry@raspberrypi.local:/home/raspberry/
 
 - The application performs two primary demonstrations in the main function:
  - LED State Control:
-        - Initializes a GPIO pin.
-        - Sets state to High (LED ON) and prints GPIO_18 State: High.
-        - Sets state to Low (LED OFF) and prints GPIO_18 State: Low.
-        - Delays are included to allow for hardware observation.
+   - Initializes a GPIO pin.
+   - Sets state to High (LED ON) and prints GPIO_18 State: High.
+   - Sets state to Low (LED OFF) and prints GPIO_18 State: Low.
+   - Delays are included to allow for hardware observation.
    
   ![ToggleLED.png](ToggleLED.png)
   
@@ -95,9 +95,9 @@ scp ./gpio_app raspberry@raspberrypi.local:/home/raspberry/
 
 
 - Configuration Logic Verification:
-      - Compares different PinConfig structures.
-      - Detects if a new configuration matches the existing one.
-      - Outputs Config Check: SAME CFG or Config Check: DIFF CFG to the terminal based on the parameters.
+   - Compares different PinConfig structures.
+   - Detects if a new configuration matches the existing one.
+   - Outputs Config Check: SAME CFG or Config Check: DIFF CFG to the terminal based on the parameters.
 
   ![InitDiffCFG.png](InitDiffCFG.png)
   
