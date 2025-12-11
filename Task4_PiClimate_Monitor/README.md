@@ -4,7 +4,8 @@
 > A Modern C++ implementation for reading temperature and humidity from DHT11 sensor using Raspberry Pi 3 GPIO with pigpio library.
 
 ![C++](https://img.shields.io/badge/C++-17-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Platform](https://img.shields.io/badge/Platform-Raspberry%20Pi%203-red.svg)
+
 
 ---
 
@@ -21,7 +22,6 @@
 - [Output Examples](#-output-examples)
 - [Troubleshooting](#-troubleshooting)
 - [Lessons Learned](#-lessons-learned)
-
 ---
 
 ## 🎯 Project Overview
@@ -321,9 +321,9 @@ float temp = rawTemp / 10.0f;
 
 ---
 
-## 🏗️ Software Architecture
+##  Software Architecture
 
-### Class Hierarchy:
+### 🏗️ Class Hierarchy:
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -832,6 +832,3 @@ Date: December 2025
 ---
 
 *This project was developed as a learning exercise for Modern C++ and embedded systems programming on Raspberry Pi.*
-```
-
-**This README covers everything we discussed!** 📚🚀
