@@ -63,6 +63,13 @@ CPP_TASK5/
 └── README.md
 ```
 
+### Screenshots
+- Terminal
+![](terminalOutput.png)
+- HW
+![](HardwareOutput.png)
+
+
 ---
 
 ## 🔧 Build Instructions
