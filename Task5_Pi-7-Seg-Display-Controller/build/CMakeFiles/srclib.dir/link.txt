@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -shared -Wl,-soname,libsrclib.so -o libsrclib.so CMakeFiles/srclib.dir/src/IStream.cpp.o CMakeFiles/srclib.dir/src/Stream.cpp.o CMakeFiles/srclib.dir/src/OStream.cpp.o CMakeFiles/srclib.dir/src/SevenSegment.cpp.o CMakeFiles/srclib.dir/src/gpio.cpp.o CMakeFiles/srclib.dir/src/terminal.cpp.o 

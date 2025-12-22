@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/SevenSegmentProject.dir/app/main.cpp.o -o SevenSegmentProject  -Wl,-rpath,/home/abdo/ITI/03-Modern_CPP/Tasks/CPP_TASK5/build libsrclib.so 

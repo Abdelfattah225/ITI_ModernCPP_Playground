@@ -1,0 +1,4 @@
+/home/abdo/ITI/03-Modern_CPP/Tasks/CPP_TASK5/build/CMakeFiles/SevenSegmentProject.dir
+/home/abdo/ITI/03-Modern_CPP/Tasks/CPP_TASK5/build/CMakeFiles/srclib.dir
+/home/abdo/ITI/03-Modern_CPP/Tasks/CPP_TASK5/build/CMakeFiles/edit_cache.dir
+/home/abdo/ITI/03-Modern_CPP/Tasks/CPP_TASK5/build/CMakeFiles/rebuild_cache.dir
